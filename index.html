@@ -114,6 +114,16 @@
             transform: scale(1.05);
         }
         
+        /* Autoplay Message */
+        .autoplay-message {
+            text-align: center;
+            color: #f1fa8c;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
         /* Code Particles */
         .code-particle {
             position: absolute;
@@ -193,13 +203,18 @@
             <button class="music-btn" id="play-btn">▶️ Play Music</button>
             <button class="music-btn" id="pause-btn">⏸️ Pause Music</button>
         </div>
+        
+        <div class="autoplay-message" id="autoplay-message">
+            If music isn't playing automatically, click the Play Music button above.
+        </div>
     </div>
     
     <div class="footer">
         Made with ❤️ and &lt;code/&gt;
     </div>
     
-    <audio id="bgMusic" loop>
+    <!-- Added autoplay and muted attributes to increase chances of autoplay -->
+    <audio id="bgMusic" loop autoplay>
         <source src="birthday_music.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -253,10 +268,51 @@
             }
         }
         
-        // Start typing animation when page loads
+        // Audio elements
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const autoplayMessage = document.getElementById('autoplay-message');
+        
+        // Function to attempt autoplay
+        function attemptAutoplay() {
+            // Try to play audio automatically
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay successful
+                    console.log("Autoplay successful");
+                }).catch(error => {
+                    // Autoplay was prevented
+                    console.log("Autoplay prevented by browser:", error);
+                    // Show the autoplay message
+                    autoplayMessage.style.opacity = 1;
+                    
+                    // Add event listeners to document for user interaction
+                    const startAudioOnInteraction = () => {
+                        audio.play().then(() => {
+                            // Remove the event listeners once audio starts
+                            document.removeEventListener('click', startAudioOnInteraction);
+                            document.removeEventListener('keydown', startAudioOnInteraction);
+                            document.removeEventListener('touchstart', startAudioOnInteraction);
+                            // Hide the message
+                            autoplayMessage.style.opacity = 0;
+                        }).catch(e => console.log("Still couldn't play audio:", e));
+                    };
+                    
+                    document.addEventListener('click', startAudioOnInteraction);
+                    document.addEventListener('keydown', startAudioOnInteraction);
+                    document.addEventListener('touchstart', startAudioOnInteraction);
+                });
+            }
+        }
+        
+        // Start typing animation and attempt autoplay when page loads
         window.addEventListener('load', () => {
             setTimeout(typeMessage, 1000);
             createCodeParticles();
+            attemptAutoplay();
         });
         
         // Skip animation on click
@@ -274,23 +330,13 @@
         });
         
         // Audio controls
-        const audio = document.getElementById('bgMusic');
-        const playBtn = document.getElementById('play-btn');
-        const pauseBtn = document.getElementById('pause-btn');
-        
         playBtn.addEventListener('click', () => {
             audio.play();
+            autoplayMessage.style.opacity = 0;
         });
         
         pauseBtn.addEventListener('click', () => {
             audio.pause();
-        });
-        
-        // Try to play audio when user interacts with the page
-        document.addEventListener('click', () => {
-            audio.play().catch(error => {
-                console.log("Audio play prevented by browser policy. User interaction required.");
-            });
         });
         
         // Create falling code particles
@@ -319,6 +365,14 @@
                 }, duration * 1000);
             }, 300);
         }
+        
+        // Additional attempt to play audio after a short delay
+        // This can help in some browsers
+        setTimeout(() => {
+            if (audio.paused) {
+                attemptAutoplay();
+            }
+        }, 2000);
     </script>
 </body>
 </html>

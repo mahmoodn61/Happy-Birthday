@@ -114,14 +114,12 @@
             transform: scale(1.05);
         }
         
-        /* Autoplay Message */
-        .autoplay-message {
+        /* Music Status */
+        .music-status {
             text-align: center;
             color: #f1fa8c;
             margin-top: 10px;
             font-size: 0.9rem;
-            opacity: 0;
-            transition: opacity 0.5s ease;
         }
         
         /* Code Particles */
@@ -200,12 +198,12 @@
         </div>
         
         <div class="music-controls">
-            <button class="music-btn" id="play-btn">▶️ Play Music</button>
-            <button class="music-btn" id="pause-btn">⏸️ Pause Music</button>
+            <button class="music-btn" id="play-btn" onclick="playAudio()">▶️ Play Music</button>
+            <button class="music-btn" id="pause-btn" onclick="pauseAudio()">⏸️ Pause Music</button>
         </div>
         
-        <div class="autoplay-message" id="autoplay-message">
-            If music isn't playing automatically, click the Play Music button above.
+        <div class="music-status" id="music-status">
+            Music is ready to play
         </div>
     </div>
     
@@ -213,8 +211,8 @@
         Made with ❤️ and &lt;code/&gt;
     </div>
     
-    <!-- Added autoplay and muted attributes to increase chances of autoplay -->
-    <audio id="bgMusic" loop autoplay>
+    <!-- Audio element with controls for debugging -->
+    <audio id="bgMusic" loop>
         <source src="birthday_music.mp3" type="audio/mp3">
         Your browser does not support the audio element.
     </audio>
@@ -268,51 +266,65 @@
             }
         }
         
-        // Audio elements
-        const audio = document.getElementById('bgMusic');
-        const playBtn = document.getElementById('play-btn');
-        const pauseBtn = document.getElementById('pause-btn');
-        const autoplayMessage = document.getElementById('autoplay-message');
+        // Audio functions - Fixed with direct onclick handlers
+        const audioElement = document.getElementById('bgMusic');
+        const musicStatus = document.getElementById('music-status');
         
-        // Function to attempt autoplay
-        function attemptAutoplay() {
-            // Try to play audio automatically
-            const playPromise = audio.play();
-            
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    // Autoplay successful
-                    console.log("Autoplay successful");
-                }).catch(error => {
-                    // Autoplay was prevented
-                    console.log("Autoplay prevented by browser:", error);
-                    // Show the autoplay message
-                    autoplayMessage.style.opacity = 1;
-                    
-                    // Add event listeners to document for user interaction
-                    const startAudioOnInteraction = () => {
-                        audio.play().then(() => {
-                            // Remove the event listeners once audio starts
-                            document.removeEventListener('click', startAudioOnInteraction);
-                            document.removeEventListener('keydown', startAudioOnInteraction);
-                            document.removeEventListener('touchstart', startAudioOnInteraction);
-                            // Hide the message
-                            autoplayMessage.style.opacity = 0;
-                        }).catch(e => console.log("Still couldn't play audio:", e));
-                    };
-                    
-                    document.addEventListener('click', startAudioOnInteraction);
-                    document.addEventListener('keydown', startAudioOnInteraction);
-                    document.addEventListener('touchstart', startAudioOnInteraction);
-                });
+        // Global audio functions
+        function playAudio() {
+            console.log("Play button clicked");
+            try {
+                const playPromise = audioElement.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Audio playing successfully");
+                        musicStatus.textContent = "Music is playing 🎵";
+                    }).catch(error => {
+                        console.error("Error playing audio:", error);
+                        musicStatus.textContent = "Couldn't play music. Try again.";
+                    });
+                }
+            } catch (e) {
+                console.error("Exception playing audio:", e);
+                musicStatus.textContent = "Error playing music";
             }
         }
         
-        // Start typing animation and attempt autoplay when page loads
+        function pauseAudio() {
+            console.log("Pause button clicked");
+            try {
+                audioElement.pause();
+                musicStatus.textContent = "Music paused";
+            } catch (e) {
+                console.error("Exception pausing audio:", e);
+            }
+        }
+        
+        // Try to autoplay when page loads
         window.addEventListener('load', () => {
+            // Start typing animation
             setTimeout(typeMessage, 1000);
+            
+            // Create code particles
             createCodeParticles();
-            attemptAutoplay();
+            
+            // Try to play audio automatically
+            try {
+                const playPromise = audioElement.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log("Autoplay successful");
+                        musicStatus.textContent = "Music is playing 🎵";
+                    }).catch(error => {
+                        console.log("Autoplay prevented by browser:", error);
+                        musicStatus.textContent = "Click Play Music to start the music";
+                    });
+                }
+            } catch (e) {
+                console.error("Exception during autoplay:", e);
+            }
         });
         
         // Skip animation on click
@@ -327,16 +339,6 @@
                 returnStatementElement.style.display = 'block';
                 functionCallElement.style.display = 'block';
             }
-        });
-        
-        // Audio controls
-        playBtn.addEventListener('click', () => {
-            audio.play();
-            autoplayMessage.style.opacity = 0;
-        });
-        
-        pauseBtn.addEventListener('click', () => {
-            audio.pause();
         });
         
         // Create falling code particles
@@ -366,13 +368,12 @@
             }, 300);
         }
         
-        // Additional attempt to play audio after a short delay
-        // This can help in some browsers
-        setTimeout(() => {
-            if (audio.paused) {
-                attemptAutoplay();
+        // Add event listeners for user interaction to help with autoplay
+        document.addEventListener('click', function() {
+            if (audioElement.paused) {
+                playAudio();
             }
-        }, 2000);
+        }, { once: true });
     </script>
 </body>
 </html>

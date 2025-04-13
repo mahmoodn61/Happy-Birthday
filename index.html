@@ -1,88 +1,324 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>🎂 Happy Birthday! 🎈</title>
-  <style>
-    body {
-      font-family: 'Courier New', monospace;
-      background-color: #add8e6;
-      padding: 40px;
-      color: #000000;
-      text-align: center;
-    }
-    .container {
-      max-width: 800px;
-      margin: auto;
-      background: #1e1e1e;
-      padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-      text-align: left;
-      white-space: pre-wrap;
-      color: #dcdcdc;
-      border: 3px dashed #ff69b4;
-      position: relative;
-      font-size: 1rem;
-    }
-    h1 {
-      text-align: center;
-      color: #ff4500;
-      font-size: 2.5em;
-    }
-    .emojis {
-      font-size: 1.5em;
-      margin: 15px 0;
-      text-align: center;
-    }
-    .balloons {
-      font-size: 2em;
-      position: absolute;
-      top: -30px;
-      right: 20px;
-    }
-    .cake {
-      font-size: 2em;
-      position: absolute;
-      bottom: -30px;
-      left: 20px;
-    }
-    .keyword { color: #569CD6; }
-    .string { color: #D69D85; }
-    .comment { color: #6A9955; font-style: italic; }
-    .function { color: #DCDCAA; }
-    .variable { color: #9CDCFE; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday to My Coding Brother!</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Consolas', 'Courier New', monospace;
+        }
+        
+        body {
+            background-color: #1e1e2e;
+            color: #f8f8f2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        /* Card Container */
+        .card {
+            background-color: #282a36;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 800px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            margin: 20px;
+            border: 2px solid #bd93f9;
+        }
+        
+        /* Title Styles */
+        .title {
+            color: #ff79c6;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 0 10px rgba(255, 121, 198, 0.5);
+        }
+        
+        /* Message Container */
+        .message-container {
+            background-color: #44475a;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 20px;
+            position: relative;
+            border-left: 4px solid #50fa7b;
+        }
+        
+        /* Function Declaration */
+        .function-declaration {
+            color: #50fa7b;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+        
+        /* Message Text */
+        .message {
+            color: #f8f8f2;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            white-space: pre-line;
+            margin-left: 20px;
+        }
+        
+        /* Return Statement */
+        .return-statement {
+            color: #ffb86c;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            margin-left: 20px;
+        }
+        
+        /* Function Call */
+        .function-call {
+            color: #8be9fd;
+            font-size: 1.2rem;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        /* Music Controls */
+        .music-controls {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 15px;
+        }
+        
+        .music-btn {
+            background-color: #6272a4;
+            color: #f8f8f2;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .music-btn:hover {
+            background-color: #ff79c6;
+            transform: scale(1.05);
+        }
+        
+        /* Code Particles */
+        .code-particle {
+            position: absolute;
+            color: rgba(189, 147, 249, 0.7);
+            font-size: 1rem;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .function-declaration, .return-statement, .function-call {
+                font-size: 1rem;
+            }
+            
+            .message {
+                font-size: 0.9rem;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+        }
+        
+        /* Cursor Animation */
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 20px;
+            background-color: #f8f8f2;
+            margin-left: 5px;
+            animation: blink 1s infinite;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            color: #6272a4;
+            font-size: 0.9rem;
+        }
+    </style>
 </head>
 <body>
-  <h1>🎉🎂 Happy Birthday, Code Wizard! 🎮🎁</h1>
-  <div class="container">
-    <div class="balloons">🎈🎈🎈</div>
-    <div class="cake">🍰🎂🍰</div>
-    <span class="keyword">def</span> <span class="function">birthday_message</span>():<br>
-        <span class="variable">love</span> = <span class="string">"infinite"</span><br>
-        <span class="variable">pride</span> = <span class="keyword">True</span><br>
-        <span class="variable">message</span> = <span class="keyword">f</span><span class="string">"""<br>
-        To the brother who used to hold the game controller as a kid, and now hold the control of his future! 🎮<br><br>
-        A brother who codes the world into something better,<br>
-        and fills our lives with peace and love through his heart. 💻❤️<br><br>
-        You've always been an inspiration to me—<br>
-        in your dedication, patience, kindness,<br>
-        and the way you dream big. 🚀<br><br>
-        May your year be full of successful projects,<br>
-        bug-free, joyful moments, and love flowing between every line of life. 🧁✨<br><br>
-        With pride and love,<br>
-        Your sister 💖<br>
-        """</span><br>
-        <span class="keyword">return</span> <span class="variable">message</span> <span class="keyword">if</span> <span class="variable">pride</span> <span class="keyword">else</span> <span class="string">"Still... Happy Birthday!"</span><br><br>
-    <span class="function">print</span>(<span class="function">birthday_message</span>())<br>
-    <div class="emojis">🎊🥳🎉👾🕹️💾🎈🎂</div>
-  </div>
+    <div class="card">
+        <h1 class="title">Happy Birthday to My Coding Brother! 🎮 → 💻</h1>
+        
+        <div class="message-container">
+            <div class="function-declaration">def birthday_message():</div>
+            <div class="message" id="typed-message"></div>
+            <div class="return-statement" id="return-statement" style="display: none;">
+                return "Wishing you the best year ever! 🎂"
+            </div>
+        </div>
+        
+        <div class="function-call" id="function-call" style="display: none;">
+            birthday_message() <span class="cursor"></span>
+        </div>
+        
+        <div class="music-controls">
+            <button class="music-btn" id="play-btn">▶️ Play Music</button>
+            <button class="music-btn" id="pause-btn">⏸️ Pause Music</button>
+        </div>
+    </div>
+    
+    <div class="footer">
+        Made with ❤️ and &lt;code/&gt;
+    </div>
+    
+    <audio id="bgMusic" loop>
+        <source src="birthday_music.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // The birthday message
+        const birthdayMessage = `    To the brother who used to hold the game controller as a kid, and now hold the control of his future!
 
-  <audio id="bg-music" autoplay loop>
-    <source src="birthday.mp3" type="audio/mpeg">
-    Your browser does not support the audio element.
-  </audio>
+    A brother who codes the world into something better,
+    and fills our lives with peace and love through his heart.
+
+    You've always been an inspiration to me—
+    in your dedication, patience, kindness,
+    and the way you dream big.
+
+    May your year be full of successful projects,
+    bug-free, joyful moments, and love flowing between every line of life.
+
+    With pride and love,
+    Your sister`;
+        
+        // Typing animation
+        const typedMessageElement = document.getElementById('typed-message');
+        const returnStatementElement = document.getElementById('return-statement');
+        const functionCallElement = document.getElementById('function-call');
+        let charIndex = 0;
+        let isTyping = true;
+        
+        function typeMessage() {
+            if (charIndex < birthdayMessage.length) {
+                typedMessageElement.textContent += birthdayMessage.charAt(charIndex);
+                charIndex++;
+                
+                // Adjust typing speed - slower for punctuation
+                const nextChar = birthdayMessage.charAt(charIndex);
+                const delay = (nextChar === '.' || nextChar === '!' || nextChar === '?') ? 500 : 
+                              (nextChar === ',' || nextChar === ';') ? 300 : 
+                              (nextChar === '\n') ? 700 : 50;
+                
+                setTimeout(typeMessage, delay);
+            } else {
+                isTyping = false;
+                // Show return statement after typing is complete
+                setTimeout(() => {
+                    returnStatementElement.style.display = 'block';
+                    // Show function call after return statement appears
+                    setTimeout(() => {
+                        functionCallElement.style.display = 'block';
+                    }, 1000);
+                }, 1000);
+            }
+        }
+        
+        // Start typing animation when page loads
+        window.addEventListener('load', () => {
+            setTimeout(typeMessage, 1000);
+            createCodeParticles();
+        });
+        
+        // Skip animation on click
+        typedMessageElement.addEventListener('click', () => {
+            if (isTyping) {
+                // Stop the typing animation and show full message
+                typedMessageElement.textContent = birthdayMessage;
+                charIndex = birthdayMessage.length;
+                isTyping = false;
+                
+                // Show return statement and function call
+                returnStatementElement.style.display = 'block';
+                functionCallElement.style.display = 'block';
+            }
+        });
+        
+        // Audio controls
+        const audio = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        
+        playBtn.addEventListener('click', () => {
+            audio.play();
+        });
+        
+        pauseBtn.addEventListener('click', () => {
+            audio.pause();
+        });
+        
+        // Try to play audio when user interacts with the page
+        document.addEventListener('click', () => {
+            audio.play().catch(error => {
+                console.log("Audio play prevented by browser policy. User interaction required.");
+            });
+        });
+        
+        // Create falling code particles
+        function createCodeParticles() {
+            const codeChars = ['0', '1', '{', '}', '()', '[]', ';', ':', '=', '+', '-', '*', '/', '<>', 'def', 'for', 'if', 'else', 'return', 'class'];
+            const colors = ['#ff79c6', '#50fa7b', '#8be9fd', '#bd93f9', '#f1fa8c'];
+            
+            setInterval(() => {
+                const particle = document.createElement('div');
+                particle.className = 'code-particle';
+                particle.textContent = codeChars[Math.floor(Math.random() * codeChars.length)];
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.opacity = Math.random() * 0.7 + 0.3;
+                particle.style.fontSize = `${Math.random() * 1 + 0.5}rem`;
+                
+                // Set animation duration randomly
+                const duration = Math.random() * 10 + 5;
+                particle.style.animationDuration = `${duration}s`;
+                
+                document.body.appendChild(particle);
+                
+                // Remove particle after animation completes
+                setTimeout(() => {
+                    particle.remove();
+                }, duration * 1000);
+            }, 300);
+        }
+    </script>
 </body>
 </html>

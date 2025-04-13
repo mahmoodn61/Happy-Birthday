@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🎂 Happy Birthday! 🎈</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background-color: #add8e6;
+      padding: 40px;
+      color: #000000;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: left;
+      white-space: pre-wrap;
+      color: #dcdcdc;
+      border: 3px dashed #ff69b4;
+      position: relative;
+      font-size: 1rem;
+    }
+    h1 {
+      text-align: center;
+      color: #ff4500;
+      font-size: 2.5em;
+    }
+    .emojis {
+      font-size: 1.5em;
+      margin: 15px 0;
+      text-align: center;
+    }
+    .balloons {
+      font-size: 2em;
+      position: absolute;
+      top: -30px;
+      right: 20px;
+    }
+    .cake {
+      font-size: 2em;
+      position: absolute;
+      bottom: -30px;
+      left: 20px;
+    }
+    .keyword { color: #569CD6; }
+    .string { color: #D69D85; }
+    .comment { color: #6A9955; font-style: italic; }
+    .function { color: #DCDCAA; }
+    .variable { color: #9CDCFE; }
+  </style>
+</head>
+<body>
+  <h1>🎉🎂 Happy Birthday, Code Wizard! 🎮🎁</h1>
+  <div class="container">
+    <div class="balloons">🎈🎈🎈</div>
+    <div class="cake">🍰🎂🍰</div>
+    <span class="keyword">def</span> <span class="function">birthday_message</span>():<br>
+        <span class="variable">love</span> = <span class="string">"infinite"</span><br>
+        <span class="variable">pride</span> = <span class="keyword">True</span><br>
+        <span class="variable">message</span> = <span class="keyword">f</span><span class="string">"""<br>
+        To the brother who used to hold the game controller as a kid, and now hold the control of his future! 🎮<br><br>
+        A brother who codes the world into something better,<br>
+        and fills our lives with peace and love through his heart. 💻❤️<br><br>
+        You've always been an inspiration to me—<br>
+        in your dedication, patience, kindness,<br>
+        and the way you dream big. 🚀<br><br>
+        May your year be full of successful projects,<br>
+        bug-free, joyful moments, and love flowing between every line of life. 🧁✨<br><br>
+        With pride and love,<br>
+        Your sister 💖<br>
+        """</span><br>
+        <span class="keyword">return</span> <span class="variable">message</span> <span class="keyword">if</span> <span class="variable">pride</span> <span class="keyword">else</span> <span class="string">"Still... Happy Birthday!"</span><br><br>
+    <span class="function">print</span>(<span class="function">birthday_message</span>())<br>
+    <div class="emojis">🎊🥳🎉👾🕹️💾🎈🎂</div>
+  </div>
+
+  <audio id="bg-music" autoplay loop>
+    <source src="birthday.mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>

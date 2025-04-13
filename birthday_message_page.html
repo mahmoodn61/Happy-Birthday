@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Happy Birthday!</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      background: linear-gradient(to bottom right, #fceabb, #f8b500);
+      padding: 40px;
+      color: #2d2d2d;
+      text-align: center;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fffbea;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      text-align: left;
+      white-space: pre-wrap;
+    }
+    h1 {
+      text-align: center;
+      color: #d35400;
+    }
+    audio {
+      display: block;
+      margin: 30px auto 0;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎉 Happy Birthday! 🎉</h1>
+  <div class="container">
+    def birthday_message():<br>
+        love = "infinite"<br>
+        pride = True<br>
+        message = f"""<br>
+        To the brother who used to hold the game controller as a kid, and now hold the control of his future!<br><br>
+        A brother who codes the world into something better,<br>
+        and fills our lives with peace and love through his heart.<br><br>
+        You've always been an inspiration to me—<br>
+        in your dedication, patience, kindness,<br>
+        and the way you dream big.<br><br>
+        May your year be full of successful projects,<br>
+        bug-free, joyful moments, and love flowing between every line of life.<br><br>
+        With pride and love,<br>
+        Your sister<br>
+        """<br>
+        return message if pride else "Still... Happy Birthday!"<br><br>
+    print(birthday_message())
+  </div>
+  <audio autoplay loop>
+    <source src="Birthday-music(2).mp3" type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
+</body>
+</html>
